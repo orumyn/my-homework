@@ -3,7 +3,7 @@ const regex = /\b[^Aa,\s]{6,}\b/g;
 console.log(text.match(regex));
 
 
-// друга частина домашньоъ роботи
+// друга частина домашньої роботи
 var arr = [
     {
         userName:"Test",
