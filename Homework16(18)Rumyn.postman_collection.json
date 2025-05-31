@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "483572e3-2891-4f0f-9488-79e33f059d05",
+		"name": "Homework16(18)Rumyn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5713831"
+	},
+	"item": [
+		{
+			"name": "Is Valid ISBN13 Number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const xml = pm.response.text();\r",
+							"\r",
+							"// 1. Статус код\r",
+							"pm.test(\"Статус код 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Content-Type містить text/xml\r",
+							"pm.test(\"Content-Type містить text/xml\", () => {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.match(/^text\\/xml(;.*)?$/);\r",
+							"});\r",
+							"\r",
+							"// 3. Відповідь містить тег IsValidISBN13Result\r",
+							"pm.test(\"Відповідь містить тег <IsValidISBN13Result>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<m:IsValidISBN13Result>\");\r",
+							"});\r",
+							"\r",
+							"// 4. Значення тегу IsValidISBN13Result — true\r",
+							"pm.test(\"ISBN є дійсним (значення true)\", () => {\r",
+							"    const isValid = /<m:IsValidISBN13Result>(true|false)<\\/m:IsValidISBN13Result>/.exec(xml);\r",
+							"    pm.expect(isValid).to.not.be.null;\r",
+							"    pm.expect(isValid[1]).to.eql(\"true\"); // перевірка саме на true\r",
+							"});\r",
+							"\r",
+							"// 5. Відповідь містить тег IsValidISBN13Response\r",
+							"pm.test(\"Містить тег <IsValidISBN13Response>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<m:IsValidISBN13Response\");\r",
+							"});\r",
+							"\r",
+							"// 6. Відповідь містить soap:Envelope\r",
+							"pm.test(\"Містить <soap:Envelope>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<soap:Envelope\");\r",
+							"});\r",
+							"\r",
+							"// 7. Відповідь містить soap:Body\r",
+							"pm.test(\"Містить <soap:Body>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<soap:Body\");\r",
+							"});\r",
+							"\r",
+							"// 8. Час відповіді менше 1000 мс\r",
+							"pm.test(\"Час відповіді < 1000 мс\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"// 9. Статус текст \"OK\"\r",
+							"pm.test(\"Статус текст OK\", () => {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// 10. Заголовок Content-Length існує\r",
+							"pm.test(\"Content-Length існує\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "\"http://webservices.daehosting.com/ISBN/GetBookInformation\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <IsValidISBN13 xmlns=\"http://webservices.daehosting.com/ISBN\">\r\n      <sISBN>978-1-4612-9090-2</sISBN>\r\n    </IsValidISBN13>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+					"protocol": "http",
+					"host": [
+						"webservices",
+						"daehosting",
+						"com"
+					],
+					"path": [
+						"services",
+						"isbnservice.wso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Is Valid ISBN10 Number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const xml = pm.response.text();\r",
+							"\r",
+							"// 1. Статус код\r",
+							"pm.test(\"Статус код 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2. Content-Type містить text/xml\r",
+							"pm.test(\"Content-Type містить text/xml\", () => {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.match(/^text\\/xml(;.*)?$/);\r",
+							"});\r",
+							"\r",
+							"// 3. Відповідь містить тег IsValidISBN13Result\r",
+							"pm.test(\"Відповідь містить тег <IsValidISBN13Result>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<m:IsValidISBN13Result>\");\r",
+							"});\r",
+							"\r",
+							"// 4. Значення тегу IsValidISBN13Result — true\r",
+							"pm.test(\"ISBN є дійсним (значення true)\", () => {\r",
+							"    const isValid = /<m:IsValidISBN13Result>(true|false)<\\/m:IsValidISBN13Result>/.exec(xml);\r",
+							"    pm.expect(isValid).to.not.be.null;\r",
+							"    pm.expect(isValid[1]).to.eql(\"true\"); // перевірка саме на true\r",
+							"});\r",
+							"\r",
+							"// 5. Відповідь містить тег IsValidISBN13Response\r",
+							"pm.test(\"Містить тег <IsValidISBN13Response>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<m:IsValidISBN13Response\");\r",
+							"});\r",
+							"\r",
+							"// 6. Відповідь містить soap:Envelope\r",
+							"pm.test(\"Містить <soap:Envelope>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<soap:Envelope\");\r",
+							"});\r",
+							"\r",
+							"// 7. Відповідь містить soap:Body\r",
+							"pm.test(\"Містить <soap:Body>\", () => {\r",
+							"    pm.expect(xml).to.include(\"<soap:Body\");\r",
+							"});\r",
+							"\r",
+							"// 8. Час відповіді менше 1000 мс\r",
+							"pm.test(\"Час відповіді < 1000 мс\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"// 9. Статус текст \"OK\"\r",
+							"pm.test(\"Статус текст OK\", () => {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"// 10. Заголовок Content-Length існує\r",
+							"pm.test(\"Content-Length існує\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Length\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <IsValidISBN10 xmlns=\"http://webservices.daehosting.com/ISBN\">\r\n      <sISBN>0-19-852663-6</sISBN>\r\n    </IsValidISBN10>\r\n  </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+					"protocol": "http",
+					"host": [
+						"webservices",
+						"daehosting",
+						"com"
+					],
+					"path": [
+						"services",
+						"isbnservice.wso"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
